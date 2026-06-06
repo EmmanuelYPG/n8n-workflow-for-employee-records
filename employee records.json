@@ -1,0 +1,958 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "registration-form",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        224
+      ],
+      "id": "3a0eb467-f3de-4789-bf6c-63ce2823fbf4",
+      "name": "Webhook",
+      "webhookId": "18cb8414-ef2e-4515-aabc-3601195596b4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0843f323-f657-4642-b278-6649486f0467",
+              "name": "Name",
+              "value": "={{ $json.body.full_name }}",
+              "type": "string"
+            },
+            {
+              "id": "0abfa3f4-0f33-43fb-a0f7-1184264bb9e7",
+              "name": "email",
+              "value": "={{ $json.body.email }}",
+              "type": "string"
+            },
+            {
+              "id": "649e3aae-7819-4c2a-9dba-3812816f298b",
+              "name": "phone",
+              "value": "={{ $json.body.question1 }}",
+              "type": "string"
+            },
+            {
+              "id": "2bd95804-ab55-4e00-a269-fb533de7481f",
+              "name": "message",
+              "value": "={{ $json.body.message }}",
+              "type": "string"
+            },
+            {
+              "id": "6d7b8679-f1f7-4581-9b7a-30e85731a6e3",
+              "name": "timestamp",
+              "value": "={{ $now }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        224
+      ],
+      "id": "4d7dfd00-c36e-4c15-94f8-5c244d6881e6",
+      "name": "Normalize data"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1JqoaBMuZdcymHSGH12LWRAhBOTfdlnqIgQgjXBvPP1s",
+          "mode": "list",
+          "cachedResultName": "Usuarios registrados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1JqoaBMuZdcymHSGH12LWRAhBOTfdlnqIgQgjXBvPP1s/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 637235463,
+          "mode": "list",
+          "cachedResultName": "errors",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1JqoaBMuZdcymHSGH12LWRAhBOTfdlnqIgQgjXBvPP1s/edit#gid=637235463"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $('Normalize data').item.json.Name }}",
+            "Email": "={{ $('Normalize data').item.json.email }}",
+            "phone": "={{ $('Normalize data').item.json.phone }}",
+            "message": "={{ $('Normalize data').item.json.message }}",
+            "timestamp": "={{ $('Normalize data').item.json.timestamp }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        416
+      ],
+      "id": "19903f24-6e22-4bdf-b802-018358a7c432",
+      "name": "register non valid user",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Sz9VpZRAG6ezl0vd",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1JqoaBMuZdcymHSGH12LWRAhBOTfdlnqIgQgjXBvPP1s",
+          "mode": "list",
+          "cachedResultName": "Usuarios registrados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1JqoaBMuZdcymHSGH12LWRAhBOTfdlnqIgQgjXBvPP1s/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "users",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1JqoaBMuZdcymHSGH12LWRAhBOTfdlnqIgQgjXBvPP1s/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.Name }}",
+            "Email": "={{ $json.email }}",
+            "phone": "={{ $json.phone }}",
+            "message": "={{ $json.message }}",
+            "timestamp": "={{ $json.timestamp }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "timestamp",
+              "displayName": "timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        224
+      ],
+      "id": "fddaf570-c2f0-452d-aef7-28e78bcee130",
+      "name": "register new valid user",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Sz9VpZRAG6ezl0vd",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "7caadc0d-06f2-4684-8d89-bae303ef8198",
+              "leftValue": "={{ $json.email }}",
+              "rightValue": "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        448,
+        224
+      ],
+      "id": "ec83462e-3816-44a9-9c61-39026a665303",
+      "name": "email validation"
+    },
+    {
+      "parameters": {
+        "fromEmail": "emmanuel7pg7@gmail.com",
+        "toEmail": "={{ $json.Email }}",
+        "subject": "Registro a movistar completado!",
+        "html": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px;\">\n    <div style=\"background-color: #ffffff; border-radius: 8px; padding: 30px; max-width: 600px; margin: 0 auto; box-shadow: 0 2px 8px rgba(0,0,0,0.1);\">\n        \n        <h2 style=\"color: #4a7c9e; margin-bottom: 20px;\">Hola {{ $json.Name }},</h2>\n        \n        <p style=\"color: #555555; font-size: 14px; line-height: 1.6;\">\n            Agradecemos por completar nuestro formulario. A continuación, te mostramos los datos que registraste:\n        </p>\n        \n        <div style=\"background-color: #f0f3f7; border-left: 4px solid #4a7c9e; padding: 15px; margin: 20px 0; border-radius: 4px;\">\n            <ul style=\"color: #555555; font-size: 14px; line-height: 1.8; margin: 0; padding-left: 20px;\">\n                <li><strong>Nombre:</strong> {{ $json.Name }}</li>\n                <li><strong>Email:</strong> \n{{ $json.Email }}</li>\n                <li><strong>Teléfono:</strong> {{ $json.phone }}</li>\n                <li><strong>Mensaje:</strong> {{ $json.message }}</li>\n            </ul>\n        </div>\n        \n        <p style=\"color: #888888; font-size: 12px; line-height: 1.6; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0;\">\n            Este mensaje fue enviado automáticamente. Por favor, no respondas a este correo.\n        </p>\n        \n    </div>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1120,
+        224
+      ],
+      "id": "3b80bb05-8815-4fc8-af9c-c2620c4db1de",
+      "name": "Send an Email",
+      "webhookId": "0386751a-c907-4959-b299-f64d97d18a9a",
+      "credentials": {
+        "smtp": {
+          "id": "zpQI0vkRX7jNoEbr",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        896,
+        224
+      ],
+      "id": "d3b4576b-bdc9-421b-844e-2ea163d225ed",
+      "name": "Wait 10 sec",
+      "webhookId": "4251b4d1-7c77-4314-b1fa-06760e11d57f"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://ipapi.co/{{ $('Webhook').item.json.body.ip }}/json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        1344,
+        -64
+      ],
+      "id": "784dcf8f-98b5-4451-83f6-e6854d5bdfc1",
+      "name": "enrich data"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "225ee843-e073-4722-b921-052dd8ec58d8",
+              "name": "Country",
+              "value": "={{ $json.country_name }}",
+              "type": "string"
+            },
+            {
+              "id": "81a47172-babd-4169-bb23-132cffc1038c",
+              "name": "Ip",
+              "value": "={{ $json.ip }}",
+              "type": "string"
+            },
+            {
+              "id": "ed361e9f-3db5-426c-984a-250bbd8367a3",
+              "name": "CIty",
+              "value": "={{ $json.city }}",
+              "type": "string"
+            },
+            {
+              "id": "8b492608-2c98-4bd5-bead-8d9e4ecf6dc6",
+              "name": "Postal",
+              "value": "={{ $json.postal }}",
+              "type": "string"
+            },
+            {
+              "id": "fe9f7ce7-258d-4052-a18c-e84efad4e130",
+              "name": "Latitude",
+              "value": "={{ $json.latitude }}",
+              "type": "number"
+            },
+            {
+              "id": "b2dfe298-1d04-4a6f-8277-08a767f81394",
+              "name": "Longitud",
+              "value": "={{ $json.longitude }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1568,
+        -64
+      ],
+      "id": "470ea0c8-0c32-4cb5-b54b-b38b50d97d03",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        -288
+      ],
+      "id": "1121ec1c-cd97-41a2-a558-d639c41a632d",
+      "name": "Telegram Trigger",
+      "webhookId": "30f26cb5-59bc-44f7-86fd-1090eabe0b46",
+      "credentials": {
+        "telegramApi": {
+          "id": "lU0nIynBUUyloj6D",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "6697851144",
+        "text": "=Se ha registrado un nuevo usuario: {{ $('Normalize data').item.json.Name }}\nEmail: {{ $('Normalize data').item.json.email }}\nPais: {{ $json.Country }}\nCP: {{ $json.Postal }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1792,
+        -64
+      ],
+      "id": "e372441c-fa68-4532-8290-0a0a71872ed0",
+      "name": "Send a text message with data",
+      "webhookId": "a3ca78ed-300c-4101-972b-58927b69ba86",
+      "credentials": {
+        "telegramApi": {
+          "id": "lU0nIynBUUyloj6D",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "6a4bf902-98c5-447b-8ac0-e4a207adca64",
+              "leftValue": "={{ $('Wait 10 sec').item.json.phone }}",
+              "rightValue": "55",
+              "operator": {
+                "type": "string",
+                "operation": "startsWith"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1344,
+        224
+      ],
+      "id": "18b90e02-56b3-4f06-a2ec-4a2cce547d8f",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "email": "={{ $('email validation').item.json.email }}",
+        "additionalFields": {
+          "firstName": "={{ $('email validation').item.json.Name }}",
+          "phoneNumber": "={{ $('email validation').item.json.phone }}"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 2.2,
+      "position": [
+        1568,
+        128
+      ],
+      "id": "a512d70a-176e-4749-ac56-adff60e2b95a",
+      "name": "mexican number",
+      "credentials": {
+        "hubspotOAuth2Api": {
+          "id": "MdQniBKqqxaIoe5f",
+          "name": "HubSpot OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "email": "={{ $('Wait 10 sec').item.json.phone }}",
+        "additionalFields": {
+          "country": "NON mexican",
+          "firstName": "={{ $('email validation').item.json.Name }}",
+          "phoneNumber": "={{ $('email validation').item.json.phone }}"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.hubspot",
+      "typeVersion": 2.2,
+      "position": [
+        1568,
+        320
+      ],
+      "id": "d26bca36-80e8-497a-a515-87c06aa11705",
+      "name": "non mexican number",
+      "credentials": {
+        "hubspotOAuth2Api": {
+          "id": "MdQniBKqqxaIoe5f",
+          "name": "HubSpot OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "task": "WUJIQTdjanBlQWpOejZ0Qw",
+        "title": "=search employees: {{ $('register new valid user').item.json.Name }}",
+        "additionalFields": {
+          "dueDate": "={{ $today.plus(5,'days') }}",
+          "notes": "=Nombre: {{ $('register new valid user').item.json.Name }}\n\nEmail: {{ $('register new valid user').item.json.Email }}\n\nNumero: {{ $('register new valid user').item.json.phone }}\n\nMessage: {{ $('register new valid user').item.json.message }}\n\n"
+        }
+      },
+      "type": "n8n-nodes-base.googleTasks",
+      "typeVersion": 1,
+      "position": [
+        1792,
+        224
+      ],
+      "id": "9807c693-8853-49d9-b470-f3d0356543b5",
+      "name": "Create a task",
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "Qjvrrn9MJv9RPfp4",
+          "name": "Google Tasks OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"success\",\n  \"message\": \"Form recived correctly\",\n  \"nombre\": \"{{ $('Normalize data').item.json.Name }}\",\n  \"timestamp\": \"{{ $('Normalize data').item.json.timestamp }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        2016,
+        128
+      ],
+      "id": "aae83cdb-433b-4cf9-b037-99176a9fe647",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"Status\": \"Failed\",\n  \"message\": \"the email was invalid\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        896,
+        416
+      ],
+      "id": "132549c0-9e2d-4894-b403-f723b02aceaa",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtHour": 7
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -16,
+        736
+      ],
+      "id": "bd4babae-aa41-42a6-abea-c17969d1675f",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1JqoaBMuZdcymHSGH12LWRAhBOTfdlnqIgQgjXBvPP1s",
+          "mode": "list",
+          "cachedResultName": "Usuarios registrados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1JqoaBMuZdcymHSGH12LWRAhBOTfdlnqIgQgjXBvPP1s/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "users",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1JqoaBMuZdcymHSGH12LWRAhBOTfdlnqIgQgjXBvPP1s/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        736
+      ],
+      "id": "6a85566e-243f-44e6-b0ac-18810dcc0414",
+      "name": "Get row(s) in Users n8n list",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Sz9VpZRAG6ezl0vd",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst today = new Date().toISOString().split(\"T\")[0];\n\nconst filteredItems = items.filter((item) => {\n  const timestamp = new Date(item?.json?.timestamp).toISOString().split(\"T\")[0];\n  return timestamp === today;\n});\n\nreturn filteredItems;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        432,
+        736
+      ],
+      "id": "c45d5031-38a5-4794-a330-0815c788edca",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "11c01d48-56de-4e6c-8500-2fd1044721ac",
+              "leftValue": "={{ $items.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        656,
+        736
+      ],
+      "id": "cd61db4e-bde7-44c1-9418-0bbe2db209e7",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nlet htmlList = \"<ul>\";\n\nitems.forEach((item) => {\n  htmlList += `<li><b>${item?.json?.Name}</b> - ${item?.json?.Email}</li>`;\n});\n\nhtmlList += \"</ul>\";\n\nreturn { htmlList };\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        896,
+        608
+      ],
+      "id": "16397f90-2674-449f-849f-06704577b381",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "fromEmail": "emmanuel7pg7@gmail.com",
+        "toEmail": "elviflores2017@gmail.com",
+        "subject": "=Resumen de contactos -  {{ $now.toFormat('dd-MM-yyyy') }}",
+        "html": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px;\">\n    <div style=\"background-color: #ffffff; border-radius: 8px; padding: 30px; max-width: 600px; margin: 0 auto; box-shadow: 0 2px 8px rgba(0,0,0,0.1);\">\n        \n        <h2 style=\"color: #4a7c9e; margin-bottom: 20px;\">Hola Equipo,</h2>\n        \n        <p style=\"color: #555555; font-size: 14px; line-height: 1.6; margin-bottom: 25px;\">\n            A continuación, encontrarás la lista de miembros del equipo con sus datos de contacto:\n        </p>\n        \n        <div style=\"background-color: #f0f3f7; border-left: 4px solid #4a7c9e; padding: 20px; margin: 25px 0; border-radius: 4px;\">\n            {{ $json.htmlList }}\n        </div>\n        \n        <p style=\"color: #888888; font-size: 12px; line-height: 1.6; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0;\">\n            <em>Este correo fue enviado automáticamente por n8n y generado con asistencia de IA. Por favor, no respondas a este mensaje.</em>\n        </p>\n        \n    </div>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1104,
+        608
+      ],
+      "id": "c68b8326-b714-4dd0-b38f-ef1c271a3c22",
+      "name": "Send an Email1",
+      "webhookId": "f11a348b-45f8-4feb-a727-588202b465fc",
+      "credentials": {
+        "smtp": {
+          "id": "zpQI0vkRX7jNoEbr",
+          "name": "SMTP account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalize data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize data": {
+      "main": [
+        [
+          {
+            "node": "email validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "email validation": {
+      "main": [
+        [
+          {
+            "node": "register new valid user",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "enrich data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "register non valid user",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "register new valid user": {
+      "main": [
+        [
+          {
+            "node": "Wait 10 sec",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 10 sec": {
+      "main": [
+        [
+          {
+            "node": "Send an Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "enrich data": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Send a text message with data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an Email": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "mexican number",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "non mexican number",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "mexican number": {
+      "main": [
+        [
+          {
+            "node": "Create a task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "non mexican number": {
+      "main": [
+        [
+          {
+            "node": "Create a task",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a task": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message with data": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "register non valid user": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in Users n8n list",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in Users n8n list": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Send an Email1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "741c0952-18fc-40ac-96ea-36d4eeef3ade",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4216db011fc67bc6717c05d7fdf4b369be958f3e7dc97f4bf3d0110cbb1cbb37"
+  },
+  "id": "oclUYrfobpHx35aq",
+  "tags": []
+}
